@@ -10,7 +10,8 @@ subMaxMin :: [Int] -> Int
 subMaxMin xs = maximum xs - minimum xs
 
 divideEvenly :: [Int] -> Int
-divideEvenly xs = head [x `div` y | x <- xs, y <- xs, x /= y, x `mod` y == 0]
+divideEvenly xs = head [y `div` x | (x:ys) <- init $ tails sorted, y <- ys, y `mod` x == 0]
+  where sorted = sort xs
 
 calc :: (Int, Int) -> IO (Int, Int)
 calc acc = do
