@@ -3,16 +3,15 @@ import System.Environment
 import Data.List
 import Data.Char
 
-sumMatchingNextString :: String -> Int
-sumMatchingNextString s = sumMatchingNext (digitToInt (last s):(map digitToInt s)) 0
+stringToIntList = map digitToInt
 
-sumMatchingNext :: [Int] -> Int -> Int
-sumMatchingNext (x:xs@(y:_)) acc
-  | x == y    = sumMatchingNext xs acc + y
-  | otherwise = sumMatchingNext xs acc
-sumMatchingNext _ acc = acc
-
+sumMatchingNextN :: [Int] -> Int -> Int
+sumMatchingNextN xs n = sum [xs !! i | i <- [0..len-1], xs !! i == lst !! (i+n)]
+  where len = length xs
+        lst = cycle xs
 
 main = do
   s <- getLine
-  putStrLn $ show $ sumMatchingNextString s
+  let lst = stringToIntList s
+  let half = length lst `div` 2
+  putStrLn $ show $ (sumMatchingNextN lst 1, sumMatchingNextN lst half)
