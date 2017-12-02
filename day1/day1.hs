@@ -14,4 +14,4 @@ main = do
   s <- getLine
   let lst = stringToIntList s
   let half = length lst `div` 2
-  putStrLn $ show $ (sumMatchingNextN lst 1, sumMatchingNextN lst half)
+  print (sumMatchingNextN lst 1, sumMatchingNextN lst half)

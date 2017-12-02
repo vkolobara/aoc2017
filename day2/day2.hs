@@ -17,12 +17,12 @@ calc :: (Int, Int) -> IO (Int, Int)
 calc acc = do
   line <- getLine
   if null line
-    then return (acc)
+    then return acc
     else do
         let lst = stringToIntList line
-        calc (fst acc + (subMaxMin lst), snd acc + (divideEvenly lst))
+        calc (fst acc + subMaxMin lst, snd acc + divideEvenly lst)
 
 main :: IO()
 main = do
   res <- calc (0, 0)
-  putStrLn $ show res
+  print res
