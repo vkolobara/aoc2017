@@ -9,7 +9,11 @@ calc acc = do
   if null line
     then return (acc)
     else do
-        calc (acc + (subMaxMin $ stringToIntList line))
+        --part1
+        --calc (acc + (subMaxMin $ stringToIntList line))
+
+        --part2
+        calc (acc + (divideEvenly $ stringToIntList line))
 
 main :: IO()
 main = do
@@ -22,4 +26,5 @@ stringToIntList = map read . words
 subMaxMin :: [Int] -> Int
 subMaxMin xs = maximum xs - minimum xs
 
-
+divideEvenly :: [Int] -> Int
+divideEvenly xs = head [x `div` y | x <- xs, y <- xs, x /= y, x `mod` y == 0]
