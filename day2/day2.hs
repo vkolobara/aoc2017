@@ -3,7 +3,7 @@ import Data.Char
 import System.Environment
 import System.IO
 
-calc :: Int -> IO Int
+calc :: (Int, Int) -> IO (Int, Int)
 calc acc = do
   line <- getLine
   if null line
@@ -13,11 +13,11 @@ calc acc = do
         --calc (acc + (subMaxMin $ stringToIntList line))
 
         --part2
-        calc (acc + (divideEvenly $ stringToIntList line))
+        calc (fst acc + (subMaxMin $ stringToIntList line), snd acc + (divideEvenly $ stringToIntList line))
 
 main :: IO()
 main = do
-  res <- calc 0
+  res <- calc (0, 0)
   putStrLn $ show res
 
 stringToIntList :: String -> [Int]
