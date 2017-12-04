@@ -9,7 +9,7 @@ checkIfValid1 xs = ws == nub ws
   where ws = words xs
 
 checkIfValid2 xs = ws == nub ws
-  where ws = map sort $ words xs
+  where ws = (map sort . words) xs
 
 part1 = length . filter (==True) . map checkIfValid1
 part2 = length . filter (==True) . map checkIfValid2
