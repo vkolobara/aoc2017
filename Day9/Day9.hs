@@ -1,8 +1,4 @@
-import           Data.List
-import           Lib.IOLib
-
-testInput :: String
-testInput = "{{{},{},{{}}}}"
+import           Data.List ()
 
 data State = Open | Garbage | Ignore
 
@@ -34,6 +30,6 @@ part2 :: String -> Int
 part2 = countGarbage
 
 main = do
-    s <- readLinesToStringList
-    print $ (part1 . head) s
-    print $ (part2 . head) s
+    s <- getLine
+    print $ part1 s
+    print $ part2 s
