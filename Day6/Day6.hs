@@ -1,10 +1,11 @@
-import Data.Char
-import Data.List (map, transpose, maximumBy, elemIndex, findIndex)
-import Data.List.Split
-import Data.Map (Map, insert, empty, member, (!))
-import Data.Ord
-import System.Environment
-import System.IO
+import           Data.Char
+import           Data.List          (elemIndex, findIndex, map, maximumBy,
+                                     transpose)
+import           Data.List.Split
+import           Data.Map           (Map, empty, insert, member, (!))
+import           Data.Ord
+import           System.Environment
+import           System.IO
 
 findMaxElIndex :: [Int] -> (Int, Int)
 findMaxElIndex xs = (m, i)
@@ -15,10 +16,10 @@ doIteration xs = map sum . transpose $ chunkL
     where (m, i) = findMaxElIndex xs
           len    = length xs
           chunkL = chunksOf len newL
-          newL   = xsRem ++ ((replicate (i+1) 0) ++ (take (m) $ repeat 1))
+          newL   = xsRem ++ replicate (i+1) 0 ++ replicate m 1
           xsRem  = take i xs ++ [(xs !! i) - m] ++ drop (i+1) xs
 
-execute xs m acc 
+execute xs m acc
     | member xs m = (acc, acc - (m ! xs))
     | otherwise           = execute nextStep (insert xs acc m) (acc+1)
         where nextStep = doIteration xs
